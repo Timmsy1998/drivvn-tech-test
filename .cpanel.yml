@@ -49,7 +49,7 @@ deployment:
           ! -name ".deploy.example.conf" \
           -exec echo "{}" >> "$DEPLOY_LOG" \;\
           -exec cp -RTpu "{}" "$DEPLOY_PATH/{}" \;\
-          -fprint "$DEPLOY_LIST""
+          -fprint "$DEPLOY_LIST"
 
     # Switch working directory
     - cd $DEPLOY_PATH
