@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('make');
             $table->string('model');
             $table->date('build_date');
-            $table->unsignedBigInteger('colour_id');
+            $table->unsignedBigInteger('colour_id')->nullable();
             $table->foreign('colour_id')->references('id')->on('colours');
             $table->timestamps();
         });
