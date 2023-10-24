@@ -20,7 +20,6 @@ deployment:
 
     # Start deployment
     - echo "=== Deployment started" > "$DEPLOY_LOG"
-    - echo "=== $DEPLOY_PATH" > "$DEPLOY_LOG"
 
     # Remove old files and empty directories
     - |
