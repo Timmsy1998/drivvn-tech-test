@@ -103,7 +103,7 @@ class CarControllerTest extends TestCase
             ->assertJson(['message' => 'Car updated successfully']);
     }
 
-     /**
+    /**
      * Test deleting a car by ID.
      */
     public function testDeleteCar()
@@ -134,5 +134,24 @@ class CarControllerTest extends TestCase
         // and the response JSON message matches the expected "Car not found" message.
         $response->assertStatus(404)
             ->assertJson(['message' => 'Car not found']);
+    }
+
+    /**
+     * Test adding a car with an invalid build date.
+     */
+    public function testAddCarWithInvalidBuildDate()
+    {
+        // Simulate a POST request to add a new car with an invalid build date (more than four years ago)
+        $response = $this->json('POST', '/api/cars', [
+            'make' => 'OldCarMaker',
+            'model' => 'AncientModel',
+            'build_date' => now()->subYears(5)->toDateString(),
+            'colour_id' => 1,
+        ]);
+
+        // Assert that the response status is 422 (Unprocessable Entity) due to validation failure
+        // and that the response JSON message indicates a validation error.
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors('build_date');
     }
 }

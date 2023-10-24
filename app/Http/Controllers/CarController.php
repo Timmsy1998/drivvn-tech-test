@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Rules\ValidCarAge;
 
 class CarController extends Controller
 {
@@ -19,7 +20,7 @@ class CarController extends Controller
         $validatedData = $request->validate([
             'make' => 'required|string',
             'model' => 'required|string',
-            'build_date' => 'required|date',
+            'build_date' => ['required', 'date', new ValidCarAge],
             'colour_id' => 'required|integer',
         ]);
 
@@ -59,7 +60,7 @@ class CarController extends Controller
         $validatedData = $request->validate([
             'make' => 'required|string',
             'model' => 'required|string',
-            'build_date' => 'required|date',
+            'build_date' => ['required', 'date', new ValidCarAge],
             'colour_id' => 'required|integer',
         ]);
 
