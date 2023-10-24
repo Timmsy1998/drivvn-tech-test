@@ -73,6 +73,5 @@ deployment:
         if [[ "$RUN_MIGRATIONS" == "true" ]]; then php artisan migrate &>> "$DEPLOY_LOG"; fi
       fi
 
-    - |
-      - echo "=== Deployment Complete" >> "$DEPLOY_LOG"
+    - echo "=== Deployment Complete" >> "$DEPLOY_LOG"
 
