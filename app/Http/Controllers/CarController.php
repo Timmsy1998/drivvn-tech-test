@@ -27,7 +27,7 @@ class CarController extends Controller
         // Create a new car
         $car = Car::create($validatedData);
 
-        return response()->json(['message' => 'Car added successfully', 'car' => $car], 201);
+        return response()->json(['message' => 'Car added successfully', 'car' => $car], 201, [], JSON_PRETTY_PRINT);
     }
 
     /**
@@ -44,7 +44,7 @@ class CarController extends Controller
             return response()->json(['message' => 'Car not found'], 404);
         }
 
-        return response()->json(['car' => $car], 200);
+        return response()->json(['car' => $car], 200, [], JSON_PRETTY_PRINT);
     }
 
     /**
@@ -72,7 +72,7 @@ class CarController extends Controller
 
         $car->update($validatedData);
 
-        return response()->json(['message' => 'Car updated successfully', 'car' => $car], 200);
+        return response()->json(['message' => 'Car updated successfully', 'car' => $car], 200, [], JSON_PRETTY_PRINT);
     }
 
     /**
@@ -91,7 +91,7 @@ class CarController extends Controller
 
         $car->delete();
 
-        return response()->json(['message' => 'Car deleted successfully'], 200);
+        return response()->json(['message' => 'Car deleted successfully'], 200, [], JSON_PRETTY_PRINT);
     }
 
     /**
@@ -103,6 +103,6 @@ class CarController extends Controller
     {
         $cars = Car::all();
 
-        return response()->json(['cars' => $cars], 200);
+        return response()->json(['cars' => $cars], 200, [], JSON_PRETTY_PRINT);
     }
 }
