@@ -2,12 +2,37 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class CarControllerTest extends TestCase
 {
+
+    use DatabaseTransactions;
+
+    /**
+     * Set up the test environment.
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        // Additional setup code that runs before each test method.
+        Artisan::call('migrate'); // Run migrations
+        Artisan::call('db:seed'); // Seed the database
+    }
+
+    /**
+     * Tear down the test environment.
+     */
+    public function tearDown(): void
+    {
+        // Additional teardown code that runs after each test method.
+        Artisan::call('migrate:reset'); // Roll back migrations
+
+        parent::tearDown();
+    }
 
     /**
      * Test adding a new car.
@@ -16,10 +41,10 @@ class CarControllerTest extends TestCase
     {
         // Simulate a POST request to add a new car with specific data
         $response = $this->json('POST', '/api/cars', [
-            'make' => 'Toyota',
-            'model' => 'Camry',
-            'build_date' => '2022-01-15',
-            'colour_id' => 1,
+            'make' => 'Ford',
+            'model' => 'Mustang',
+            'build_date' => '2023-03-01',
+            'colour_id' => 2,
         ]);
 
         // Assert that the response status is 201 (Created)
